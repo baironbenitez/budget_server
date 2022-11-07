@@ -1,6 +1,7 @@
 
 const { User } = require('../schema/user.schema')
-const { createPassword } = require('../middlewares/password')
+const { createPassword } = require('../middlewares/password');
+const { generateToken } = require('../middlewares/token');
 
 const createUser = async (req, res) => {
 
@@ -8,19 +9,24 @@ const createUser = async (req, res) => {
     userData.password = createPassword(userData.password);
 
     try {
-        const userdb =  await User(userData);
-        let user = await userdb.save();
+        let user =  await User.create(userData);
+        user.password = undefined;
+        
+        const token = await generateToken(user.id);
 
         res.json({
             ok: true,
             message: 'Usuario creado con exito',
             data: {
-                user
+                user,
+                token
             },
             statusCode: 200
         });
 
     } catch (error) {
+        console.log(error);
+
         res.status(500).json({
             ok: false,
             message: 'Hubo un error creando el usuario',
