@@ -4,6 +4,8 @@ const router = express.Router();
 
 const { validateErrors } = require('../middlewares/valitadateErros');
 const { login } = require('../controller/auth.controller');
+const { validateUserExistByUsername } = require('../middlewares/auth');
+const { comparePassword } = require('../middlewares/password')
 
 router.post(
     '/login',
@@ -14,6 +16,8 @@ router.post(
         .notEmpty().withMessage('La contraseña es requerida').isLength({min: 6})
     ],
     validateErrors,
+    validateUserExistByUsername,
+    comparePassword,
     login
 );
 
