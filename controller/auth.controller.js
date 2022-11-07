@@ -1,8 +1,16 @@
-const login = (req, res) => {
+const { generateToken } = require("../middlewares/token");
+
+const login =  async (req, res) => {
+    
+    const { userId } = req.body;
+    
+    const token = await generateToken(userId);
+
     res.json({
         ok: true,
         statusCode: 200,
-        data:{ }
+        data:{ token },
+        message: 'Usuario logueado con exito'
     });
 }
 
