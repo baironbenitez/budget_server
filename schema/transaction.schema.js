@@ -1,12 +1,16 @@
 const mongoose = require('mongoose');
 const { Schema } = require('mongoose');
 
-const BudgetSchema = new Schema({
+const TransactionSchema = new Schema({
     amount: {
         type: Number,
+        required: true,
+    },
+    type: {
+        type: String,
         required: true
     },
-    user:{
+    budget:{
         required: true,
         type: mongoose.Types.ObjectId
     },
@@ -24,12 +28,11 @@ const BudgetSchema = new Schema({
             ret.id = ret._id;
             delete ret._id;
             delete ret.__v;
-            delete ret.user;
         }
     }
 });
 
-const Budget = mongoose.model('Budget', BudgetSchema);
+const Budget = mongoose.model('Transaction', TransactionSchema);
 
 module.exports  = {
     Budget
