@@ -3,9 +3,13 @@ const { Schema } = require('mongoose');
 
 const BudgetSchema = new Schema({
     amount: {
-        type: String,
-        require: true,
+        type: Number,
+        required: true,
         unique: true
+    },
+    user:{
+        required: true,
+        type: mongoose.Types.ObjectId
     },
     createAt: {
         type: Date,
@@ -21,6 +25,7 @@ const BudgetSchema = new Schema({
             ret.id = ret._id;
             delete ret._id;
             delete ret.__v;
+            delete ret.user;
         }
     }
 });
