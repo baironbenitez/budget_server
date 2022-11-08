@@ -33,7 +33,22 @@ const validateToken = ( req, res, next ) => {
     })
 }
 
+const exitsToken = (req, res, next) => {
+    const token = req.headers['token'];
+    if (!token || typeof token !== 'string') {
+        res.status(403).json({
+            ok: false,
+            message: 'Recurso no autorizado',
+            statusCode: 403,
+            data: { token }
+        })
+    }else{
+        next();
+    }
+}
+
 module.exports = {
     generateToken,
-    validateToken
+    validateToken,
+    exitsToken
 }
