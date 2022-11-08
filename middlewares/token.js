@@ -2,9 +2,9 @@ const jsonWebToken = require('jsonwebtoken')
 
 const secret = process.env.SECRET_TOKEN;
 
-const generateToken =  ( userId ) => {
+const generateToken =  ( user ) => {
     return new Promise((resolve) => {
-        jsonWebToken.sign({ userId } , secret ,{ expiresIn: '24h' }, (e,jwt) => {
+        jsonWebToken.sign({ user } , secret ,{ expiresIn: '24h' }, (e,jwt) => {
             if (e) {
                 resolve(null)
             }else{
@@ -27,7 +27,7 @@ const validateToken = ( req, res, next ) => {
                 statusCode: 401
             })
         }else{
-            req.body.userId = decoded.userId;
+            req.user = decoded.user;
             next();
         }
     })
