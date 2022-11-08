@@ -5,7 +5,7 @@ const router = express.Router();
 const { validateErrors } = require('../middlewares/valitadateErros');
 const { login } = require('../controller/auth.controller');
 const { validateUserExistByUsername } = require('../middlewares/auth');
-const { comparePassword } = require('../middlewares/password')
+const { comparePassword } = require('../middlewares/password');
 
 router.post(
     '/login',
