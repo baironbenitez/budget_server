@@ -6,6 +6,7 @@ const { conectMongodb } = require('./config/mongodb');
 const routesUser = require('./routes/user.route');
 const routesAuth = require('./routes/auth.route');
 const routesBudget = require('./routes/budget.route');
+const { exitsToken, validateToken } = require('./middlewares/token');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -20,7 +21,7 @@ app.use(cors(corsOptions));
 
 app.use('/user',routesUser);
 app.use('/auth',routesAuth);
-app.use('/budget',routesBudget);
+app.use('/budget',exitsToken,validateToken,routesBudget);
 
 app.listen(port,() =>{
     console.log(`Aplicacion corriendo en el puerto ${port}`);

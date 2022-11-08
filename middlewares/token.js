@@ -27,7 +27,7 @@ const validateToken = ( req, res, next ) => {
                 statusCode: 401
             })
         }else{
-            req.body.userId = decoded;
+            req.body.userId = decoded.userId;
             next();
         }
     })
