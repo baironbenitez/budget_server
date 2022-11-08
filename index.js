@@ -1,13 +1,20 @@
 require('dotenv').config();
 const express = require('express');
-const { conectMongodb } = require('./config/mongodb');
-const routesUser = require('./routes/user.route')
-const routesAuth = require('./routes/auth.route')
+const cors = require('cors');
 
+const { conectMongodb } = require('./config/mongodb');
+const routesUser = require('./routes/user.route');
+const routesAuth = require('./routes/auth.route');
 const app = express();
 const port = process.env.PORT || 3000;
 
+const corsOptions = {
+    origin: "http://localhost:4200",
+    methods: ["GET","POST"]
+};
+
 app.use( express.json());
+app.use(cors(corsOptions));
 
 app.use('/user',routesUser);
 app.use('/auth',routesAuth);
