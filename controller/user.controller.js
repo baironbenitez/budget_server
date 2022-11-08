@@ -25,12 +25,11 @@ const createUser = async (req, res) => {
         });
 
     } catch (error) {
-        console.log(error);
-
+        const message = error.message;
         res.status(500).json({
             ok: false,
             message: 'Hubo un error creando el usuario',
-            data: {},
+            data: { message },
             statusCode: 500
         });
     }

@@ -19,10 +19,11 @@ const findUserByUsername = async (req, res, next) => {
         }
 
     } catch (error) {
+        const message = error.message;
         res.status(500).json({
             ok: false,
             message: 'Hubo un error, intentalo mas tarde',
-            data: {},
+            data: { message },
             statusCode: 500
         });
     }
