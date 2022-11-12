@@ -7,7 +7,7 @@ const TransactionSchema = new Schema({
         required: true,
     },
     type: {
-        type: String,
+        type: Number,
         required: true
     },
     budget:{
@@ -32,8 +32,8 @@ const TransactionSchema = new Schema({
     }
 });
 
-const Budget = mongoose.model('Transaction', TransactionSchema);
+const Transaction = mongoose.model('Transaction', TransactionSchema);
 
 module.exports  = {
-    Budget
+    Transaction
 }
