@@ -18,10 +18,8 @@ const createTransaction = async (req, res) => {
             return
         }
 
-        const { budget } = req.params;
         const { amount, type } = req.body;
-
-        const transactionData = { budget, amount, type };
+        const transactionData = { budget: findBudget.id, amount, type };
         const transaction =  await Transaction.create(transactionData);     
 
         res.json({

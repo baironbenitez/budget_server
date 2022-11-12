@@ -7,9 +7,7 @@ const  { validateTypeTransaction } = require('../middlewares/transaction');
 const { validateErrors } = require('../middlewares/valitadateErros');
 
 router.post(
-    '/:budget',
-    param('budget').isMongoId().withMessage('Id no valido'),
-    validateErrors,
+    '/',
     [
         check('amount').isNumeric().withMessage('El monto debe ser un numero')
         .isLength({ min: 1 }).withMessage('La transaccion minima es de 1'),

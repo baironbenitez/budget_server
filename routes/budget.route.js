@@ -1,7 +1,7 @@
 const express = require('express');
 const { check } = require('express-validator');
 const router = express.Router();
-const { createBudget } = require('../controller/budget.controller');
+const { createBudget, getBudget } = require('../controller/budget.controller');
 const { validateErrors } = require('../middlewares/valitadateErros');
 
 router.post(
@@ -11,5 +11,7 @@ router.post(
     validateErrors,
     createBudget
 );
+
+router.get('/',getBudget);
 
 module.exports = router;

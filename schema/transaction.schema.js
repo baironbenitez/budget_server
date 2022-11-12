@@ -26,6 +26,7 @@ const TransactionSchema = new Schema({
     toJSON:{
         transform: function (doc, ret) {
             ret.id = ret._id;
+            delete ret.budget
             delete ret._id;
             delete ret.__v;
         }
