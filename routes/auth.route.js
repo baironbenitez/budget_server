@@ -2,9 +2,11 @@ const express = require('express');
 const  { check } = require('express-validator')
 const router = express.Router();
 
+const { login, validateSesion } = require('../controller/auth.controller');
+
 const { validateErrors } = require('../middlewares/valitadateErros');
-const { login } = require('../controller/auth.controller');
 const { validateUserExistByUsername } = require('../middlewares/auth');
+const { exitsToken, validateToken } = require('../middlewares/token');
 const { comparePassword } = require('../middlewares/password');
 
 router.post(
@@ -19,6 +21,13 @@ router.post(
     validateUserExistByUsername,
     comparePassword,
     login
+);
+
+router.get(
+    '/session',
+    exitsToken,
+    validateToken,
+    validateSesion
 );
 
 module.exports = router;

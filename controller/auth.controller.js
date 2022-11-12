@@ -14,6 +14,16 @@ const login =  async (req, res) => {
     });
 }
 
+const validateSesion =  async (req, res) => {
+    res.json({
+        ok: true,
+        statusCode: 200,
+        data:{ },
+        message: 'Usuario autenticado'
+    });
+}
+
 module.exports = {
-    login
+    login,
+    validateSesion
 }
